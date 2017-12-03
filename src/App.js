@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-// import {
-//   BrowserRouter
-// } from 'react-router-dom';
-import Home from './routes/Home';
 import PostList from './components/PostList';
 import Post from './components/Post';
+
 import './App.css';
 
 
@@ -65,6 +62,10 @@ class App extends React.Component {
       isPost: true,
       currentPost: post
     });
+
+    // var newNames = this.state.posts;
+    // newNames.splice(0, 1);
+    // this.setState({ posts: newNames });
     
   }
 
@@ -91,8 +92,7 @@ class App extends React.Component {
                 posts={this.state.posts} 
                 loading={this.state.loading} 
                 goToPost={this.goToPost}/>
-            }
-              
+            }  
           </div>
         </div>
     );

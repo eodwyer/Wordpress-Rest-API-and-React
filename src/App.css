@@ -24,6 +24,7 @@ body {
     background: #000 url(./imgs/bg-main.jpg) center top no-repeat;
   background-size:100% auto;
   height: 100%;
+  overflow: hidden;
 }
 
 
@@ -50,7 +51,6 @@ body {
 
 
 .App{
-  background: rgba(0,0,0,.5);
   max-width: 640px;
   margin:0 auto;
   padding:20px;
@@ -65,7 +65,7 @@ Header
 ------------------------------------*/
 .main-header{
   padding:20px;
-  background: rgba(0,0,0,.5);
+  background: rgba(0,0,0,.75);
   text-align: center;
   border-radius: 15px;
 }
@@ -100,12 +100,28 @@ Header
 /*
 Body
 ------------------------------------*/
+.postsList > ul{
+  padding:0;
+  margin:0;
+}
+  .postsList > ul > li{
+    list-style: none;
+  }
+
+
+
 .post{
   background: #fff;
   padding:20px;
   margin:20px auto;
-  border-radius: 15px;
+  box-shadow: 10px 10px 11px -8px rgba(0,0,0,.75);
+  border: 2px solid transparent;
+  transition:all .25s;
 }
+  .post:hover{
+    box-shadow: none;
+    border-color:#a68d6d;
+  }
 
   .post h1{
     color:#a68d6d;
@@ -116,23 +132,65 @@ Body
 
   .post a{display: none;}
 
+
 /*
 Thumbnail
 ------------------------------------*/
-.postsList{
-  padding:20px 0;
+@keyframes moveLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity:1;
+    }
 }
 .post-excerpt{
-  background: #fff;
-  padding:20px;
-  border-radius: 15px;
-  margin:20px auto;
-  text-align: left;
-  cursor: pointer;
+   animation:moveLeft 1s;
+   cursor: pointer;
 }
   
+.slide-enter{
+  transition:all .5s ease-out;
+  transform:translateX(-100%);
+  opacity:0.5;
+}
+
+/* end enter state */
+
+.slide-enter.slide-enter-active{
+  transform:translateX(0);
+  opacity:1;
+}
+
+
+/* start leave state */
+.slide-leave{
+  transition:all .5s ease-out;
+  transform:translateX(0);
+}
+
+/* end leave state */
+.slide-leave.slide-leave-active{
+  transform:translateX(-100%);
+  opacity:0.5;
+}
 
 
 /*
 Post
 ------------------------------------*/
+@keyframes moveRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0.5;
+    }
+    to {
+      transform: translateX(0);
+      opacity:1;
+    }
+}
+.post-content{
+  animation:moveRight 1s;
+}

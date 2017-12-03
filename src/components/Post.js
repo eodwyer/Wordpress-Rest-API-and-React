@@ -1,11 +1,12 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PropTypes from 'prop-types';
 
 
 const Post = props =>{
     if(!props.loading){
 	    return(
-	      	<article className="post">
+	    	<article className="post post-content">
 		      <header>
 		      	<button onClick={() => {props.returnHome()}}>Return to Posts</button>
 		        <h1>{props.post.title.rendered}</h1>
