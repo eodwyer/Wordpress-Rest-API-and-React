@@ -22,7 +22,7 @@ body {
 
 #root{
     background: #000 url(./imgs/bg-main.jpg) center top no-repeat;
-  background-size:contain;
+  background-size:100% auto;
   height: 100%;
 }
 
@@ -103,8 +103,18 @@ Body
 .post{
   background: #fff;
   padding:20px;
+  margin:20px auto;
   border-radius: 15px;
 }
+
+  .post h1{
+    color:#a68d6d;
+  }
+  .post p{
+    line-height: 1.5em;
+  }
+
+  .post a{display: none;}
 
 /*
 Thumbnail
@@ -114,20 +124,13 @@ Thumbnail
 }
 .post-excerpt{
   background: #fff;
-   background: rgba(0,0,0,.75);
-  border-radius: 15px;
-  border:1px solid #ccc;
   padding:20px;
+  border-radius: 15px;
   margin:20px auto;
   text-align: left;
+  cursor: pointer;
 }
-  .post-excerpt h1{
-    color:#a68d6d;
-  }
-  .post-excerpt p{
-    color:#fff;
-    line-height: 1.5em;
-  }
+  
 
 
 /*

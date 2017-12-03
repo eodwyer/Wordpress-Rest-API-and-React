@@ -1,10 +1,13 @@
 import React from 'react';
-import Excerpt from './Excerpt'
+import PropTypes from 'prop-types';
+
 
 function Card(props){
   const excerpt = props.post.excerpt.rendered;
+  const id = props.post.id;
+
   return(
-    <article className="post-excerpt">
+    <article className="post post-excerpt" onClick={() =>{props.goToPost(id)}}>
       <header>
         <h1>{props.post.title.rendered}</h1>
       </header>
@@ -13,6 +16,11 @@ function Card(props){
       </main>
     </article>
   );
+}
+
+Card.PropTypes = {
+  posts : PropTypes.object.isRequired,
+  goToPost: PropTypes.func.isRequired
 }
 
 export default Card;

@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import {
-  BrowserRouter
-} from 'react-router-dom';
+// import {
+//   BrowserRouter
+// } from 'react-router-dom';
 import Home from './routes/Home';
 import PostList from './components/PostList';
+import Post from './components/Post';
 import './App.css';
 
-
-function Post(){
-    return(
-      <article className="post">
-        <h1>Post</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Suspendisse iaculis nec enim et venenatis. Fusce aliquam molestie pulvinar.</p> 
-       
-      </article>
-    );
-}
 
 class Header extends Component{
   render(){
@@ -42,7 +32,9 @@ class App extends React.Component {
     super();
     this.state = {
       posts: [],
-      loading: true
+      loading: true,
+      isPost: false,
+      currentPost: {}
     };
   }
 
@@ -57,27 +49,52 @@ class App extends React.Component {
       this.setState({
         posts: response.data,
         loading: false
-      });
-
-      console.log(this.state.posts);
-        
+      });        
     })
     .catch(error => {
       console.log('Error fetching');
     });
   }
 
+  goToPost = (id) =>{
+    let post = this.state.posts.filter(function( obj ) {
+      return obj.id == id;
+    });
+
+    this.setState({
+      isPost: true,
+      currentPost: post
+    });
+    
+  }
+
+  returnHome = () =>{
+    this.setState({
+      isPost:false,
+      currentPost:{}
+    });
+  }
+
   render(){
     return(
-      <BrowserRouter>
         <div className="App">
           <Header />
           <div className='main-content'>
-           
-            <Home posts={this.state.posts} loading={this.state.loading} />
+            {
+              this.state.isPost ?
+              <Post 
+              post={this.state.currentPost[0]} 
+              loading={this.state.loading} 
+              returnHome={this.returnHome}
+              />
+              :  <PostList 
+                posts={this.state.posts} 
+                loading={this.state.loading} 
+                goToPost={this.goToPost}/>
+            }
+              
           </div>
         </div>
-      </BrowserRouter>
     );
   }
 }
