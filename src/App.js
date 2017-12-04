@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import PostList from './components/PostList';
 import Post from './components/Post';
-
 import './App.css';
 
 
-class Header extends Component{
-  render(){
-    return(
-      <header className='main-header'>
-       <h1>Blog Posts</h1>
-        <form>
-          <input type='text' placeholder='Search for a post' />
-          <input type='submit' value='Search' />
-        </form>
-        </header>
-    );
-  }
+const Header = props => {
+  return(
+    <header className='main-header'>
+     <h1>Blog Posts</h1>
+      <form>
+        <input 
+          type='text' 
+          placeholder='Enter a post name to search'
+          value={props.searchTerm}
+          onChange={props.handleSearchInput}
+          />
+      </form>
+    </header>
+  );
 }
-
-
-
 
 class App extends React.Component {
   constructor(){
@@ -31,7 +28,8 @@ class App extends React.Component {
       posts: [],
       loading: true,
       isPost: false,
-      currentPost: {}
+      currentPost: {},
+      searchTerm: '',
     };
   }
 
@@ -41,7 +39,9 @@ class App extends React.Component {
 
   performSearch = (query = 'cats') =>{
 
-    axios.get(`http://localhost/portfolio/scribblings/wp-json/wp/v2/posts`)
+    axios.get(`http://eoinodwyer.com/wp-json/wp/v2/posts/?_embed`
+    )
+  
     .then(response => {
       this.setState({
         posts: response.data,
@@ -49,24 +49,19 @@ class App extends React.Component {
       });        
     })
     .catch(error => {
-      console.log('Error fetching');
+      console.log('Error fetching: ' + error);
     });
   }
 
   goToPost = (id) =>{
     let post = this.state.posts.filter(function( obj ) {
-      return obj.id == id;
+      return obj.id === id;
     });
 
     this.setState({
       isPost: true,
       currentPost: post
     });
-
-    // var newNames = this.state.posts;
-    // newNames.splice(0, 1);
-    // this.setState({ posts: newNames });
-    
   }
 
   returnHome = () =>{
@@ -76,12 +71,20 @@ class App extends React.Component {
     });
   }
 
+  handleSearchInput = (e) =>{
+    this.setState({ searchTerm: e.target.value });
+  }
+
   render(){
     return(
         <div className="App">
-          <Header />
-          <div className='main-content'>
+          <Header 
+            searchTerm={this.state.searchTerm}
+            handleSearchInput={this.handleSearchInput}
+          />
+          <main className='main-content'>
             {
+              /*render Post if post selected. Postlist otherwise */
               this.state.isPost ?
               <Post 
               post={this.state.currentPost[0]} 
@@ -89,11 +92,13 @@ class App extends React.Component {
               returnHome={this.returnHome}
               />
               :  <PostList 
-                posts={this.state.posts} 
-                loading={this.state.loading} 
-                goToPost={this.goToPost}/>
+                  posts={this.state.posts} 
+                  loading={this.state.loading} 
+                  goToPost={this.goToPost}
+                  searchTerm={this.state.searchTerm}
+                  />
             }  
-          </div>
+          </main>
         </div>
     );
   }

@@ -17,7 +17,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
 
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+pre{
+  overflow: scroll;
+  background: #000;
+  color:#fff;
+  padding:20px;
 }
 
 #root{
@@ -51,7 +62,7 @@ body {
 
 
 .App{
-  max-width: 640px;
+  max-width: 960px;
   margin:0 auto;
   padding:20px;
   min-height: 100vh;
@@ -94,6 +105,7 @@ Header
     height: 40px;
     line-height: 40px;
     padding:0 15px;
+    width: 100%;
 
   }
 
@@ -118,7 +130,8 @@ Body
   border: 2px solid transparent;
   transition:all .25s;
 }
-  .post:hover{
+  .post:hover,
+  .post:focus{
     box-shadow: none;
     border-color:#a68d6d;
   }
@@ -126,11 +139,11 @@ Body
   .post h1{
     color:#a68d6d;
   }
-  .post p{
+  .post p,
+  .post li{
     line-height: 1.5em;
   }
 
-  .post a{display: none;}
 
 
 /*
@@ -138,17 +151,21 @@ Thumbnail
 ------------------------------------*/
 @keyframes moveLeft {
     from {
-      transform: translateX(-100%);
+      transform: translateY(100%);
       opacity: 0;
     }
     to {
-      transform: translateX(0);
+      transform: translateY(0);
       opacity:1;
     }
 }
 .post-excerpt{
    animation:moveLeft 1s;
    cursor: pointer;
+   float:left;
+   width:45%;
+   margin-left:2.5%;
+   margin-right:2.5%;
 }
   
 .slide-enter{
