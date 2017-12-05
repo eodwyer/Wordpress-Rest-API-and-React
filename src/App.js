@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Header from'./components/Header';
 import PostList from './components/PostList';
 import Post from './components/Post';
 import './App.css';
 
-
-const Header = props => {
-  return(
-    <header className='main-header'>
-     <h1>Blog Posts</h1>
-      <form>
-        <input 
-          type='text' 
-          placeholder='Enter a post name to search'
-          value={props.searchTerm}
-          onChange={props.handleSearchInput}
-          />
-      </form>
-    </header>
-  );
-}
 
 class App extends React.Component {
   constructor(){

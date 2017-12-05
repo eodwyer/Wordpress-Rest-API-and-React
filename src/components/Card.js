@@ -10,7 +10,7 @@ function Card(props){
     <article className="post post-excerpt" onClick={() =>{props.goToPost(id)}}>
       <header>
         <h1>{props.post.title.rendered}</h1>
-        <img src={props.post._embedded['wp:featuredmedia'][0].media_details.sizes['medium'].source_url} alt='' />
+        <img src={props.post._embedded['wp:featuredmedia'][0].media_details.sizes['full'].source_url} alt='' />
       </header>
       <main>
         <div className="excerpt" dangerouslySetInnerHTML={{__html:excerpt}} />

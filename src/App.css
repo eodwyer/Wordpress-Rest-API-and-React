@@ -10,6 +10,7 @@ html {
 html{
   height: 100%;
   position: relative;
+  overflow-y:scroll;
 }
 
 
@@ -163,21 +164,26 @@ Thumbnail
    animation:moveLeft 1s;
    cursor: pointer;
    float:left;
-   width:45%;
-   margin-left:2.5%;
    margin-right:2.5%;
+}
+
+@media all and (min-width: 768px){
+  .post-excerpt{
+    width:45%;
+    margin-left:2.5%;
+  }
 }
   
 .slide-enter{
+  transform: translateY(100%);
   transition:all .5s ease-out;
-  transform:translateX(-100%);
-  opacity:0.5;
+  opacity:0;
 }
 
 /* end enter state */
 
 .slide-enter.slide-enter-active{
-  transform:translateX(0);
+  transform: translateY(0%);
   opacity:1;
 }
 
@@ -185,13 +191,11 @@ Thumbnail
 /* start leave state */
 .slide-leave{
   transition:all .5s ease-out;
-  transform:translateX(0);
 }
 
 /* end leave state */
 .slide-leave.slide-leave-active{
-  transform:translateX(-100%);
-  opacity:0.5;
+  opacity:0;
 }
 
 
@@ -210,4 +214,20 @@ Post
 }
 .post-content{
   animation:moveRight 1s;
+}
+
+/*
+Empty List
+---------------------------------------*/
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity:1;
+    }
+}
+.emptyList{
+  animation: fadeIn 1s;
 }

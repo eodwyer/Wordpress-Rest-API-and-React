@@ -23,8 +23,9 @@ const Post = props =>{
 }
 
 Post.PropTypes = {
-	post : PropTypes.object,
-	returnHome: PropTypes.func
+	loading: PropTypes.bool.isRequired,
+	post : PropTypes.object.isRequired,
+	returnHome: PropTypes.func.isRequired
 }
 
 export default Post;
