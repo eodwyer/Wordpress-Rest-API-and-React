@@ -22,7 +22,7 @@ class App extends React.Component {
     this.performSearch();
   }
 
-  performSearch = (query = 'cats') =>{
+  performSearch = () =>{
 
     axios.get(`http://eoinodwyer.com/wp-json/wp/v2/posts/?_embed`
     )
